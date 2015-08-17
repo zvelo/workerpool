@@ -9,16 +9,16 @@ type job struct {
 
 // The Handler interface is used by workers to execute a job
 type Handler interface {
-	Do(context.Context, interface{})
+	Do(context.Context, int, interface{})
 }
 
 // The HandlerFunc type is an adapter to allow the use of ordinary functions as
 // worker handlers
-type HandlerFunc func(context.Context, interface{})
+type HandlerFunc func(context.Context, int, interface{})
 
 // Do calls f(ctx, data)
-func (f HandlerFunc) Do(ctx context.Context, data interface{}) {
-	f(ctx, data)
+func (f HandlerFunc) Do(ctx context.Context, id int, data interface{}) {
+	f(ctx, id, data)
 }
 
 // A Dispatcher maintains a pool of workers and sends them jobs

@@ -29,7 +29,7 @@ func (w worker) Start() worker {
 			case j := <-w.jobCh:
 				// we have received a work request.
 				if j.ctx.Err() == nil {
-					w.dispatcher.handler.Do(j.ctx, j.data)
+					w.dispatcher.handler.Do(j.ctx, w.id, j.data)
 				}
 			case <-w.quit:
 				// we have received a signal to stop
